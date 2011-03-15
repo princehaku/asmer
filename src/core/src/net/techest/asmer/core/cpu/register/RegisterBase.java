@@ -27,7 +27,7 @@ public abstract class RegisterBase {
 
     protected int length = 0;
 
-    protected int bits = 0;
+    protected String bits = "";
 
     abstract String getName();
     

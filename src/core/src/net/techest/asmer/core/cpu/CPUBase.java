@@ -18,24 +18,29 @@
 
 package net.techest.asmer.core.cpu;
 
+import net.techest.asmer.core.cpu.register.Registers;
+
 /**
  *
  * @author princehaku
  */
-public class CPUBase implements CPUInterface{
+public abstract class CPUBase implements CPUInterface{
 
-    Instruction ir;
+    protected InstructionWorker ir;
     
-    String ds;
+    protected Registers regs;
 
     public CPUBase(){
-        ds="";
+        regs=new Registers();
+        LoadReg();
+        LoadIns();
     }
 
-    public void run(){
-          System.out.print(ds);
-    }
 
+    public abstract void LoadReg();
+
+    public abstract void LoadIns();
+    
     public void fetch() {
         //TODO:编码
         throw new UnsupportedOperationException("Not supported yet.");

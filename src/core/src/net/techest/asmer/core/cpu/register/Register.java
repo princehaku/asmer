@@ -22,7 +22,7 @@ package net.techest.asmer.core.cpu.register;
  *
  * @author princehaku
  */
-public abstract  class Register extends RegisterBase implements RegisterInterface{
+public class Register extends RegisterBase implements RegisterInterface{
 
     protected String getName() {
         return name;

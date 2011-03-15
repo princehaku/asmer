@@ -18,10 +18,27 @@
 
 package net.techest.asmer.core.cpu.register;
 
+import java.util.Collection;
+
 /**
  *
  * @author princehaku
  */
 public class RegisterFactory {
+    
+        public  static Register build(String name,int length){
+            Register r=new  Register() ;
+            return r;
+        }
 
+        public  static Register pasteBuild(String name,Register A,Register B){
+            Register r=new  Register() ;
+            r.add(B);
+            r.add(A);
+            return r;
+        }
+
+        public static Collection<Register> groupBuild(String name,int length){
+            return null;
+        }
 }
