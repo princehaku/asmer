@@ -12,27 +12,34 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  *
- *  Created on : 2011-3-6, 20:34:52
+ *  Created on : 2011-3-14, 13:34:52
  *  Author     : princehaku
  */
 
-package net.techest.asmer.core;
-
-import net.techest.asmer.core.cpu.CPUBase;
+package net.techest.asmer.core.cpu.register;
 
 /**
  *
  * @author princehaku
  */
-public class Main {
+public abstract  class Register extends RegisterBase implements RegisterInterface{
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        Asmer as=new Asmer();
-        CPUBase cpu =new CPUBase();
-        cpu.run();
+    protected String getName() {
+        return name;
     }
+
+    public int getLength() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public String getBits() {
+        return "";
+    }
+
+    public void setBits() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+
 
 }

@@ -12,27 +12,44 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  *
- *  Created on : 2011-3-6, 20:34:52
+ *  Created on : 2011-3-6, 21:47:06
  *  Author     : princehaku
  */
 
-package net.techest.asmer.core;
+package net.techest.asmer.core.cpu;
 
 /**
  *
  * @author princehaku
  */
-public class Asmer {
+public class CPUBase implements CPUInterface{
+
+    Instruction ir;
     
-    void loadScript() {
-        throw new UnsupportedOperationException("Not yet implemented");
+    String ds;
+
+    public CPUBase(){
+        ds="";
     }
 
-    void run() {
-        throw new UnsupportedOperationException("Not yet implemented");
+    public void run(){
+          System.out.print(ds);
     }
 
-    void runStep(){
+    public void fetch() {
+        //TODO:编码
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
+    public void decode() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void execute() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void writeback() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

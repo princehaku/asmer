@@ -16,23 +16,15 @@
  *  Author     : princehaku
  */
 
-package net.techest.asmer.core;
-
-import net.techest.asmer.core.cpu.CPUBase;
+package net.techest.asmer.core.cpu.register;
 
 /**
  *
  * @author princehaku
  */
-public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        Asmer as=new Asmer();
-        CPUBase cpu =new CPUBase();
-        cpu.run();
-    }
-
+public interface RegisterInterface {
+    int getLength();
+    String getBits();
+    void setBits();
 }

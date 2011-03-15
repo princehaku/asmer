@@ -12,27 +12,16 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  *
- *  Created on : 2011-3-6, 20:34:52
+ *  Created on : 2011-3-6, 21:49:46
  *  Author     : princehaku
  */
 
-package net.techest.asmer.core;
-
-import net.techest.asmer.core.cpu.CPUBase;
+package net.techest.asmer.core.cpu;
 
 /**
  *
  * @author princehaku
  */
-public class Main {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        Asmer as=new Asmer();
-        CPUBase cpu =new CPUBase();
-        cpu.run();
-    }
+public interface InstructionInterface {
 
 }
