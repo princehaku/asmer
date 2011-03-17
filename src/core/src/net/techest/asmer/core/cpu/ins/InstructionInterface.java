@@ -16,12 +16,14 @@
  *  Author     : princehaku
  */
 
-package net.techest.asmer.core.cpu;
+package net.techest.asmer.core.cpu.ins;
 
 /**
  *
  * @author princehaku
  */
 public interface InstructionInterface {
-
+    boolean check();
+    void execute();
+    void writeBack();
 }

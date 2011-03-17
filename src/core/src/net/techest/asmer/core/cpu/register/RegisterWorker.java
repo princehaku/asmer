@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author princehaku
  */
-public class Registers extends ArrayList<Register>{
+public class RegisterWorker extends ArrayList<Register>{
     
     public Register getByName(String name){
             for(int i=0;i<this.size();i++){

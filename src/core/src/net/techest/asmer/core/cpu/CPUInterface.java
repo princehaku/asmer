@@ -23,6 +23,7 @@ package net.techest.asmer.core.cpu;
  * @author princehaku
  */
 public interface CPUInterface {
+    
     /**提取
      *
      */

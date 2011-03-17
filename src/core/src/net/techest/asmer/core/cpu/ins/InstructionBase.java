@@ -12,41 +12,59 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  *
- *  Created on : 2011-3-6, 21:47:06
+ *  Created on : 2011-3-6, 21:57:15
  *  Author     : princehaku
  */
 
-package net.techest.asmer.core.cpu;
+package net.techest.asmer.core.cpu.ins;
 
-import net.techest.asmer.core.cpu.ins.InstructionWorker;
-import net.techest.asmer.core.cpu.register.RegisterWorker;
+import net.techest.asmer.core.cpu.CPUBase;
 
 /**
  *
  * @author princehaku
  */
-public abstract class CPUBase implements CPUInterface{
+public class InstructionBase {
+    /**指令名
+     *
+     */
+    private String name;
 
-    protected InstructionWorker irs;
-    
-    protected RegisterWorker regs;
+    private String pattren;
+    /**参数长度
+     *
+     */
+    private int argvLength;
 
-    public CPUBase(){
-        regs=new RegisterWorker();
-        LoadReg();
-        LoadIns();
+    public int getArgvLength() {
+        return argvLength;
     }
 
-    public abstract void LoadReg();
-
-    public abstract void LoadIns();
-    
-    public void fetch() {
-        //TODO:编码
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void setArgvLength(int argvLength) {
+        this.argvLength = argvLength;
     }
 
-    public void decode() {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPattren() {
+        return pattren;
+    }
+
+    public void setPattren(String pattren) {
+        this.pattren = pattren;
+    }
+    
+    void Instruction(CPUBase aThis) {
+        
+    }
+
+    public boolean check() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -54,8 +72,10 @@ public abstract class CPUBase implements CPUInterface{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void writeback() {
+    public void writeBack() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    
     
 }

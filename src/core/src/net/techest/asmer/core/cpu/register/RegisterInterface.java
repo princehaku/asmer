@@ -18,6 +18,8 @@
 
 package net.techest.asmer.core.cpu.register;
 
+import net.techest.asmer.core.exceptions.BitsException;
+
 /**
  *
  * @author princehaku
@@ -26,5 +28,5 @@ package net.techest.asmer.core.cpu.register;
 public interface RegisterInterface {
     int getLength();
     String getBits();
-    void setBits();
+    void setBits(String bits) throws BitsException;
 }

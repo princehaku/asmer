@@ -12,30 +12,16 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  *
- *  Created on : 2011-3-14, 13:34:52
+ *  Created on : 2011-3-17, 11:32:09
  *  Author     : princehaku
  */
-package net.techest.asmer.core.cpu.register;
+
+package net.techest.asmer.core.cpu.ins;
 
 /**
  *
  * @author princehaku
  */
-public abstract class RegisterBase {
+public class InstructionADD extends InstructionBase implements InstructionInterface{
 
-    protected String name = "";
-
-    protected int length = 0;
-
-    protected String bits = "";
-
-    abstract String getName();
-    
-    public boolean add(Register equipment) {
-        return false;
-    }
-    
-    public boolean remove(Register equipment) {
-        return false;
-    }
 }

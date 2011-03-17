@@ -5,6 +5,7 @@
 package net.techest.asmer.core;
 
 import net.techest.asmer.core.cpu.CPUBase;
+import net.techest.asmer.core.cpu.ins.InstructionADD;
 import net.techest.asmer.core.cpu.register.RegisterFactory;
 
 /**
@@ -42,11 +43,12 @@ public class CPU8086 extends CPUBase {
         regs.add(RegisterFactory.build("IP", 8));
         //标志寄存器
         regs.add(RegisterFactory.build("FR", 8));
-
     }
 
     @Override
     public void LoadIns() {
+        irs.add(new InstructionADD());
+
     }
     
 }

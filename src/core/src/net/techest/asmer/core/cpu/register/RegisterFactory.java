@@ -19,6 +19,7 @@
 package net.techest.asmer.core.cpu.register;
 
 import java.util.Collection;
+import net.techest.asmer.core.util.Log4j;
 
 /**
  *
@@ -27,14 +28,22 @@ import java.util.Collection;
 public class RegisterFactory {
     
         public  static Register build(String name,int length){
-            Register r=new  Register() ;
+            Register r=new  Register(name,length) ;
+            Log4j.i(RegisterFactory.class,"Register Build "+name +" bits length "+length);
             return r;
         }
-
+        /**创建一个组合寄存器
+         *
+         * @param name
+         * @param A
+         * @param B
+         * @return
+         */
         public  static Register pasteBuild(String name,Register A,Register B){
-            Register r=new  Register() ;
-            r.add(B);
+            Register r=new  Register(name,0) ;
             r.add(A);
+            r.add(B);
+            Log4j.i(RegisterFactory.class,"Register Build "+name+" From "+A.getName()+" & "+B.getName() +" bits length "+r.length);
             return r;
         }
 
