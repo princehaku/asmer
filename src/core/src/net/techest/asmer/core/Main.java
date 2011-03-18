@@ -20,6 +20,7 @@ package net.techest.asmer.core;
 
 
 
+import net.techest.asmer.core.cpu.CPU8086;
 import net.techest.asmer.core.cpu.CPUBase;
 
 /**
@@ -34,7 +35,7 @@ public class Main {
     public static void main(String[] args) {
         Asmer as=new Asmer();
         CPUBase cpu =new CPU8086();
-        cpu.execute();
+        cpu.execute("ADD AX,BX");
     }
 
 }

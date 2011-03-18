@@ -18,10 +18,31 @@
 
 package net.techest.asmer.core.cpu.ins;
 
+import net.techest.asmer.core.cpu.CPUBase;
+import net.techest.asmer.core.cpu.ins.InstructionBase;
+
 /**
  *
  * @author princehaku
  */
-public class InstructionADD extends InstructionBase implements InstructionInterface{
+public class InstructionTWO extends InstructionBase {
+
+
+    public InstructionTWO(CPUBase aThis) {
+        super(aThis);
+        this.setPattren("(\\S*?)\\s*?(\\S*?),(\\S*)");
+    }
+
+    @Override
+    public boolean check() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+
+    @Override
+    public void writeBack() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 
 }

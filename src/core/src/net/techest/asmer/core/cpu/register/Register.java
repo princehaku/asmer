@@ -31,7 +31,6 @@ public class Register implements RegisterInterface {
     protected String bits = "";
     protected RegisterWorker registers = new RegisterWorker();
     protected boolean protect = false;
-
     /**
      *
      * @param name
@@ -46,7 +45,7 @@ public class Register implements RegisterInterface {
      *
      * @return
      */
-    protected String getName() {
+    public String getName() {
         return name;
     }
 
@@ -102,7 +101,11 @@ public class Register implements RegisterInterface {
      *
      */
     public boolean remove(Register e) {
-        // TODO:移除组合寄存器中的一个
-        return false;
+        //移除组合寄存器中的一个
+        boolean isRemoved = registers.remove(e);
+        Log4j.i(this.getClass(),e.getName() + " removed , bits reseted ");
+        this.length -= e.length;
+        this.bits   =  "";
+        return isRemoved;
     }
 }

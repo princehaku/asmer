@@ -23,7 +23,7 @@ package net.techest.asmer.core.cpu.ins;
  * @author princehaku
  */
 public interface InstructionInterface {
-    boolean check();
-    void execute();
-    void writeBack();
+    abstract boolean check();
+    abstract void execute(String ins);
+    abstract void writeBack();
 }

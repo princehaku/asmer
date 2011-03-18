@@ -2,17 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.techest.asmer.core;
+package net.techest.asmer.core.cpu;
 
-import net.techest.asmer.core.cpu.CPUBase;
-import net.techest.asmer.core.cpu.ins.InstructionADD;
+import net.techest.asmer.core.cpu.ins.InstructionTWO;
 import net.techest.asmer.core.cpu.register.RegisterFactory;
 
 /**
  *
  * @author princehaku
  */
-public class CPU8086 extends CPUBase {
+public class CPU8086 extends CPUBase{
 
     @Override
     public void LoadReg() {
@@ -47,8 +46,12 @@ public class CPU8086 extends CPUBase {
 
     @Override
     public void LoadIns() {
-        irs.add(new InstructionADD());
-
+        irs.add(new InstructionTWO(this));
     }
-    
+
+    @Override
+    public void writeBack() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 }

@@ -18,14 +18,22 @@
 
 package net.techest.asmer.core.cpu;
 
+import com.sun.org.apache.bcel.internal.generic.Instruction;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.techest.asmer.core.cpu.ins.InstructionBase;
 import net.techest.asmer.core.cpu.ins.InstructionWorker;
+import net.techest.asmer.core.cpu.register.Register;
 import net.techest.asmer.core.cpu.register.RegisterWorker;
+import net.techest.asmer.core.exceptions.InsException;
+import net.techest.asmer.core.util.Log4j;
+import net.techest.asmer.core.util.StringUtil;
 
 /**
  *
  * @author princehaku
  */
-public abstract class CPUBase implements CPUInterface{
+public abstract class CPUBase {
 
     protected InstructionWorker irs;
     
@@ -33,29 +41,40 @@ public abstract class CPUBase implements CPUInterface{
 
     public CPUBase(){
         regs=new RegisterWorker();
+        irs= new InstructionWorker();
         LoadReg();
         LoadIns();
     }
-
+    
     public abstract void LoadReg();
 
     public abstract void LoadIns();
-    
-    public void fetch() {
-        //TODO:编码
-        throw new UnsupportedOperationException("Not supported yet.");
+
+    public void execute(String ins){
+        //第一步 读取指令名称
+        String insName=StringUtil.findMc(ins,"(\\S*?)\\s",1);
+        Log4j.i(this.getClass(),"Instruction detected "+insName);
+        InstructionBase ir=null;
+        try {
+            //让指令检查是否合格
+            ir =irs.getByName(insName);
+            //运行指令
+            ir.execute(ins);
+        } catch (InsException ex) {
+            Log4j.i(this.getClass(),"insName"+ ex.getMessage());
+        }
     }
 
-    public void decode() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+    public abstract void writeBack();
 
-    public void execute() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+    public Register getRegisterByName(String name){
+            for(int i=0;i<regs.size();i++){
+                if(regs.get(i).getName().equals(name))
+                {
+                    return regs.get(i);
+                }
 
-    public void writeback() {
-        throw new UnsupportedOperationException("Not supported yet.");
+            }
+        return null;
     }
-    
 }

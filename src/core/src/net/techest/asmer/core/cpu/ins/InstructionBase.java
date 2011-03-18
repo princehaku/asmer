@@ -15,26 +15,38 @@
  *  Created on : 2011-3-6, 21:57:15
  *  Author     : princehaku
  */
-
 package net.techest.asmer.core.cpu.ins;
 
 import net.techest.asmer.core.cpu.CPUBase;
+import net.techest.asmer.core.util.Log4j;
 
 /**
  *
  * @author princehaku
  */
-public class InstructionBase {
+public abstract class InstructionBase implements InstructionInterface {
+
     /**指令名
      *
      */
-    private String name;
-
-    private String pattren;
+    protected String name;
+    
+    protected String pattren;
     /**参数长度
      *
      */
-    private int argvLength;
+    protected int argvLength;
+
+    protected static CPUBase cpu;
+
+    protected CPUBase getCpu() {
+        return cpu;
+    }
+    
+    public InstructionBase(CPUBase aThis) {
+        cpu=aThis;
+        setName("");
+    }
 
     public int getArgvLength() {
         return argvLength;
@@ -59,23 +71,14 @@ public class InstructionBase {
     public void setPattren(String pattren) {
         this.pattren = pattren;
     }
-    
-    void Instruction(CPUBase aThis) {
-        
+
+    public abstract boolean check();
+
+    public void execute(String ins) {
+        //更具逗号 设定长度
+        Log4j.i(this.getClass(), this.getCpu().getRegisterByName("AX").getBits());
     }
 
-    public boolean check() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public void execute() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public void writeBack() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    
+    public abstract void writeBack();
     
 }

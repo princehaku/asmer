@@ -5,6 +5,7 @@
 
 package net.techest.asmer.core.cpu.ins;
 
+import net.techest.asmer.core.exceptions.InsException;
 import java.util.ArrayList;
 
 /**
@@ -13,7 +14,7 @@ import java.util.ArrayList;
  */
 public class InstructionWorker extends ArrayList<InstructionBase>{
 
-    public InstructionBase getByName(String name){
+    public InstructionBase getByName (String name) throws InsException{
             for(int i=0;i<this.size();i++){
                 if(this.get(i).getName().equals(name))
                 {
@@ -21,7 +22,7 @@ public class InstructionWorker extends ArrayList<InstructionBase>{
                 }
 
             }
-        return null;
+        throw new InsException("Ins Not Found");
     }
 
 }

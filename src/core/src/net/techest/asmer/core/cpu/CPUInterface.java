@@ -35,7 +35,7 @@ public interface CPUInterface {
     /**执行
      *
      */
-    void execute();
+    void execute(String ins);
     /**写回
      *
      */

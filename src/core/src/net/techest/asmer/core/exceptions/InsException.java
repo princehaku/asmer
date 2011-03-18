@@ -12,16 +12,20 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  *
- *  Created on : 2011-3-17, 11:40:55
+ *  Created on : 2011-3-18, 9:27:16
  *  Author     : princehaku
  */
 
-package net.techest.asmer.core.cpu.ins;
+package net.techest.asmer.core.exceptions;
 
 /**
  *
  * @author princehaku
  */
-class Instruction extends InstructionBase implements InstructionInterface{
+public class InsException extends Exception {
+
+    public InsException(String string) {
+        super(string);
+    }
 
 }
