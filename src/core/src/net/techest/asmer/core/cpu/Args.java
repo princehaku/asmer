@@ -12,37 +12,39 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  *
- *  Created on : 2011-3-17, 11:32:09
+ *  Created on : 2011-3-21, 17:19:23
  *  Author     : princehaku
  */
 
-package net.techest.asmer.core.cpu.ins;
+package net.techest.asmer.core.cpu;
 
-import net.techest.asmer.core.cpu.CPUBase;
-import net.techest.asmer.core.cpu.ins.InstructionBase;
-
-/**
+/**参数类
  *
  * @author princehaku
  */
-public class InstructionTWO extends InstructionBase {
+public class Args {
+    /**参数类型
+     *
+     */
+    private ArgsType type;
+    /**参数的值
+     *
+     */
+    private String value;
 
-
-    public InstructionTWO(CPUBase aThis) {
-        super(aThis);
-        this.setPattren("(\\S*?)\\s*?(\\S*?),(\\S*)");
+    public ArgsType getType() {
+        return type;
     }
 
-    @Override
-    public boolean check() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void setType(ArgsType type) {
+        this.type = type;
     }
 
-
-    @Override
-    public void writeBack() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public String getValue() {
+        return value;
     }
 
-
+    public void setValue(String value) {
+        this.value = value;
+    }
 }

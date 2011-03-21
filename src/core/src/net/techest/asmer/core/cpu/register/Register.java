@@ -17,8 +17,11 @@
  */
 package net.techest.asmer.core.cpu.register;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.techest.asmer.core.exceptions.BitsException;
 import net.techest.asmer.core.util.Log4j;
+import net.techest.asmer.core.util.StringUtil;
 
 /**
  *
@@ -39,6 +42,11 @@ public class Register implements RegisterInterface {
     Register(String name, int length) {
         this.name = name;
         this.length = length;
+        try {
+            this.setBits(StringUtil.plusZero("", length));
+        } catch (BitsException ex) {
+            Log4j.e(this.getClass(),ex.getMessage());
+        }
     }
 
     /**得到寄存器的名字

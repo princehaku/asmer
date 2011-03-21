@@ -28,6 +28,13 @@ public class Log4j {
         return logger;
     }
 
+    public static void e(Class obj, String msg) {
+        if (!isDebug) {
+            return;
+        }
+        getLogger(obj.getName()).error(msg);
+    }
+
     public static void i(Class obj, String msg) {
         if (!isDebug) {
             return;

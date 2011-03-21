@@ -12,24 +12,22 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  *
- *  Created on : 2011-3-21, 17:32:32
+ *  Created on : 2011-3-18, 20:47:59
  *  Author     : princehaku
  */
 
-package net.techest.asmer.core.cpu.ins;
+package net.techest.asmer.core.cpu;
 
-import net.techest.asmer.core.cpu.Args;
-
-/**
+/**指令参数分析器
  *
  * @author princehaku
  */
-public interface InstructionInterface {
+public class Analyzer {
 
-    void check(String ins);
-
-    void execute();
-
-    void writeBack();
+    public Args parse(String s){
+        Args arg=new Args();
+        arg.setType(ArgsType.REGISTER);
+        return null;
+    }
 
 }

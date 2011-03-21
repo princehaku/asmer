@@ -17,14 +17,16 @@
  */
 package net.techest.asmer.core.cpu.ins;
 
+import net.techest.asmer.core.cpu.Args;
 import net.techest.asmer.core.cpu.CPUBase;
 import net.techest.asmer.core.util.Log4j;
+import net.techest.asmer.core.util.StringUtil;
 
 /**
  *
  * @author princehaku
  */
-public abstract class InstructionBase implements InstructionInterface {
+public abstract class InstructionBase implements InstructionInterface{
 
     /**指令名
      *
@@ -72,13 +74,28 @@ public abstract class InstructionBase implements InstructionInterface {
         this.pattren = pattren;
     }
 
-    public abstract boolean check();
+    public void check(String ins){
 
-    public void execute(String ins) {
-        //更具逗号 设定长度
-        Log4j.i(this.getClass(), this.getCpu().getRegisterByName("AX").getBits());
+        //更具逗号 设定指令长度
+        this.setArgvLength(StringUtil.occurTimes(ins,",")+1);
+        //分析指令 组合匹配模式
+        String pattenAny="(\\S*?)\\s*?";
+
+        for(int i=0;i<this.getArgvLength()-1;i++){
+            pattenAny+="(\\S*?),";
+        }
+
+        pattenAny += "(\\S*)";
+
+        this.setPattren(pattren);
+        //使用cpu的寻址器分析地址
+
+
+        Args args=new Args();
+
+        
+        Log4j.i(this.getClass(), pattenAny);
+
     }
-
-    public abstract void writeBack();
     
 }

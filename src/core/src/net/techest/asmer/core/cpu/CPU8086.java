@@ -4,7 +4,8 @@
  */
 package net.techest.asmer.core.cpu;
 
-import net.techest.asmer.core.cpu.ins.InstructionTWO;
+import net.techest.asmer.core.cpu.CPUBase;
+import net.techest.asmer.core.cpu.ins.InstructionADD;
 import net.techest.asmer.core.cpu.register.RegisterFactory;
 
 /**
@@ -46,11 +47,12 @@ public class CPU8086 extends CPUBase{
 
     @Override
     public void LoadIns() {
-        irs.add(new InstructionTWO(this));
+        irs.add(new InstructionADD(this));
     }
 
     @Override
     public void writeBack() {
+        //TODO :  CPU writeBack
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

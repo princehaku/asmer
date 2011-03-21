@@ -18,9 +18,6 @@
 
 package net.techest.asmer.core.cpu;
 
-import com.sun.org.apache.bcel.internal.generic.Instruction;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.techest.asmer.core.cpu.ins.InstructionBase;
 import net.techest.asmer.core.cpu.ins.InstructionWorker;
 import net.techest.asmer.core.cpu.register.Register;
@@ -56,13 +53,16 @@ public abstract class CPUBase {
         Log4j.i(this.getClass(),"Instruction detected "+insName);
         InstructionBase ir=null;
         try {
-            //让指令检查是否合格
+            //让指令检查是否存在此指令
             ir =irs.getByName(insName);
-            //运行指令
-            ir.execute(ins);
+            //检查指令参数
+            ir.check(ins);
         } catch (InsException ex) {
-            Log4j.i(this.getClass(),"insName"+ ex.getMessage());
+            Log4j.e(this.getClass(),"insName"+ ex.getMessage());
         }
+        
+        ir.execute();
+
     }
 
     public abstract void writeBack();

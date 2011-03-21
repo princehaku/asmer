@@ -12,24 +12,32 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  *
- *  Created on : 2011-3-21, 17:32:32
+ *  Created on : 2011-3-17, 11:32:09
  *  Author     : princehaku
  */
 
 package net.techest.asmer.core.cpu.ins;
 
 import net.techest.asmer.core.cpu.Args;
+import net.techest.asmer.core.cpu.CPUBase;
 
 /**
  *
  * @author princehaku
  */
-public interface InstructionInterface {
+public class InstructionADD extends InstructionBase {
 
-    void check(String ins);
+    public InstructionADD(CPUBase aThis) {
+        super(aThis);
+        this.setName("ADD");
+    }
 
-    void execute();
+    public void execute() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-    void writeBack();
+    public void writeBack() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
 }
