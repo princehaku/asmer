@@ -18,16 +18,17 @@
 
 package net.techest.asmer.core.cpu.ins;
 
+import net.techest.asmer.core.exceptions.ArgsException;
+import net.techest.asmer.core.exceptions.InsException;
+
 /**所有指令都必须实现的接口
  * 已经被基类继承
  * @author princehaku
  */
 public interface InstructionInterface {
 
-    void check(String ins);
+    void check(String ins) throws ArgsException;
 
-    void execute();
-
-    void writeBack();
+    void execute() throws InsException ;
 
 }

@@ -18,7 +18,7 @@
 
 package net.techest.asmer.core.exceptions;
 
-/**指令异常类
+/**当使用的指令出现错误时 抛出此异常
  *
  * @author princehaku
  */

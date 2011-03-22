@@ -19,7 +19,6 @@ public class Log4j {
 
     private static Logger getLogger(String obj) {
         if (logger == null) {
-
             BasicConfigurator.configure();
         }
 

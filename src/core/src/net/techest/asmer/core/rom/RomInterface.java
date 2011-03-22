@@ -13,5 +13,5 @@ public interface RomInterface {
     void RomInterface(long byteSize);
     void getSize();
     void readBlock(long pos);
-    void writeBlock(long pos);
+    void writeBlock(long pos,String value);
 }

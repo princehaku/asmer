@@ -17,6 +17,9 @@
  */
 package net.techest.asmer.core.cpu.ins;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.techest.asmer.core.cpu.Args;
 import net.techest.asmer.core.cpu.ArgsType;
 import net.techest.asmer.core.cpu.CPUBase;
 import net.techest.asmer.core.exceptions.BitsException;
@@ -29,11 +32,11 @@ import net.techest.asmer.core.util.StringUtil;
  *
  * @author princehaku
  */
-public class InstructionADD extends InstructionBase {
+public class InstructionSUB extends InstructionBase {
 
-    public InstructionADD(CPUBase aThis) {
+    public InstructionSUB(CPUBase aThis) {
         super(aThis);
-        this.setName("ADD");
+        this.setName("SUB");
     }
 
     public void execute() throws InsException {
@@ -48,10 +51,10 @@ public class InstructionADD extends InstructionBase {
             bitsB = this.getArgv(2).getValue();
         }
         try {
-            String H = BitsString.plus(bitsA, bitsB);
+            String H = BitsString.minus(bitsA, bitsB);
             //溢出检测 如果溢出了
             if (H.length() > cpu.getRegisterByName(this.getArgv(1).getValue()).getLength()) {
-                Log4j.i(this.getClass(), "ADD OVERFLOW");
+                Log4j.i(this.getClass(), "SUB OVERFLOW");
                 //丢弃最高位
                 H = H.substring(H.length() - cpu.getRegisterByName(this.getArgv(1).getValue()).getLength(), H.length());
                 //设置符号位 和溢出位

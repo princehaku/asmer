@@ -5,14 +5,14 @@
 
 package net.techest.asmer.core.exceptions;
 
-/**当设置的位元出现错误时 抛出此异常
+/**参数解释发生错误时抛出此异常
  *
  * @author princehaku
  */
-public class BitsException extends Exception{
+public class ArgsException extends Exception {
 
-    public BitsException(String string) {
-        super(string);
+    public ArgsException(String message) {
+        super(message);
     }
 
 }

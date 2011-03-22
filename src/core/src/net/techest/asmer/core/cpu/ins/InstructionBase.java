@@ -17,13 +17,12 @@
  */
 package net.techest.asmer.core.cpu.ins;
 
+import net.techest.asmer.core.exceptions.ArgsException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import net.techest.asmer.core.cpu.Analyzer;
 import net.techest.asmer.core.cpu.Args;
-import net.techest.asmer.core.cpu.ArgsType;
 import net.techest.asmer.core.cpu.CPUBase;
-import net.techest.asmer.core.exceptions.BitsException;
+import net.techest.asmer.core.exceptions.InsException;
 import net.techest.asmer.core.util.Log4j;
 import net.techest.asmer.core.util.StringUtil;
 
@@ -50,7 +49,7 @@ public abstract class InstructionBase implements InstructionInterface{
      */
     protected int argvLength;
 
-    protected static CPUBase cpu;
+    protected CPUBase cpu;
 
     protected CPUBase getCpu() {
         return cpu;
@@ -59,6 +58,7 @@ public abstract class InstructionBase implements InstructionInterface{
     public InstructionBase(CPUBase aThis) {
         cpu=aThis;
         args=new ArrayList<Args>();
+        pattren="";
         setName("");
     }
 
@@ -74,7 +74,7 @@ public abstract class InstructionBase implements InstructionInterface{
         return name;
     }
 
-    public void setName(String name) {
+    public final void setName(String name) {
         this.name = name;
     }
 
@@ -82,11 +82,11 @@ public abstract class InstructionBase implements InstructionInterface{
         return pattren;
     }
 
-    public void setPattren(String pattren) {
+    public final void setPattren(String pattren) {
         this.pattren = pattren;
     }
 
-    public void check(String ins){
+    public void check(String ins) throws ArgsException{
 
         //更具逗号 设定指令长度
         this.setArgvLength(StringUtil.occurTimes(ins,",")+1);
@@ -100,16 +100,16 @@ public abstract class InstructionBase implements InstructionInterface{
         pattenAny += "(\\S*)";
         
         this.setPattren(pattren);
-        //使用cpu的寻址器分析地址
-        Args t1 = new Args();
-        Args t2 = new Args();
-        t1.setType(ArgsType.REGISTER);
-        t2.setType(ArgsType.REGISTER);
-        t1.setValue("AX");
-        t2.setValue("BX");
-        args.add(t1);
-        args.add(t2);
+        
         Log4j.i(this.getClass(), pattenAny);
+        //使用cpu的寻址器分析地址
+        Analyzer any=new Analyzer(cpu);
+        
+        args=any.parse(ins,pattenAny);
+
+        if(args.size()!=this.getArgvLength()){
+            throw new ArgsException("Args Not Match");
+        }
 
     }
 

@@ -41,11 +41,7 @@ public class Register implements RegisterInterface {
     Register(String name, int length) {
         this.name = name;
         this.length = length;
-        try {
-            this.setBits(StringUtil.plusZero("", length));
-        } catch (BitsException ex) {
-            Log4j.e(this.getClass(),ex.getMessage());
-        }
+        this.reset();
     }
 
     /**得到寄存器的名字
@@ -63,29 +59,30 @@ public class Register implements RegisterInterface {
      */
     public void setBits(String bits) throws BitsException {
         if( protect){
-            throw new BitsException("Set Bits Error , been protected");
+            throw new BitsException(this.getName()+" Set Bits Error , been protected");
         }
         if (bits.length() != this.length ) {
-            throw new BitsException("Set Bits Error , Length incorrect "+bits.length());
+            throw new BitsException(this.getName()+" Set Bits Error , Length incorrect "+bits.length());
         }
         if (!bits.replaceAll("0","").replaceAll("1","").equals("")) {
-            throw new BitsException("Set Bits Error , Only can be 0 or 1");
+            throw new BitsException(this.getName()+" Set Bits Error , Only can be 0 or 1");
         }
+        
         int r = 0;
+        
         for (int i = 0; i < this.registers.size(); i++) {
             Register rtmp = this.registers.get(i);
-            Log4j.i(this.getClass(),rtmp.getName() + " set as " + bits.substring(r, r + rtmp.getLength()));
             rtmp.setBits(bits.substring(r, r + rtmp.getLength()));
             r = r + rtmp.getLength();
         }
         
-        Log4j.i(this.getClass(),this.getName() + " set as " +bits);
-
         this.bitsString = bits;
+
+        Log4j.i(this.getClass(),this.getName() + " set as " +bits);
     }
 
     /**组合一个寄存器进入
-     * 先进入的在前面比如 AX = AH + AL
+     * 先进入的在前面比如 AX = AH + AL 则需要先add AX  再ADD AL
      * @param e
      * @return
      */
@@ -94,9 +91,19 @@ public class Register implements RegisterInterface {
         //调整组合寄存器的属性
         this.length += e.length;
         this.bitsString = e.getBits() + bitsString;
+        this.reset();
         return true;
     }
-
+    /**将所有位设为0
+     *
+     */
+    public void reset(){
+        try {
+            this.setBits(StringUtil.plusZero("", length));
+        } catch (BitsException ex) {
+            Log4j.i(this.getClass(), ex.getMessage());
+        }
+    }
     /**得到位元大小
      *
      * @return

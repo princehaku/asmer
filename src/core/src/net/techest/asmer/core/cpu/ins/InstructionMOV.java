@@ -21,7 +21,6 @@ import net.techest.asmer.core.cpu.ArgsType;
 import net.techest.asmer.core.cpu.CPUBase;
 import net.techest.asmer.core.exceptions.BitsException;
 import net.techest.asmer.core.exceptions.InsException;
-import net.techest.asmer.core.util.BitsString;
 import net.techest.asmer.core.util.Log4j;
 import net.techest.asmer.core.util.StringUtil;
 
@@ -29,11 +28,11 @@ import net.techest.asmer.core.util.StringUtil;
  *
  * @author princehaku
  */
-public class InstructionADD extends InstructionBase {
+public class InstructionMOV extends InstructionBase {
 
-    public InstructionADD(CPUBase aThis) {
+    public InstructionMOV(CPUBase aThis) {
         super(aThis);
-        this.setName("ADD");
+        this.setName("MOV");
     }
 
     public void execute() throws InsException {
@@ -48,19 +47,7 @@ public class InstructionADD extends InstructionBase {
             bitsB = this.getArgv(2).getValue();
         }
         try {
-            String H = BitsString.plus(bitsA, bitsB);
-            //溢出检测 如果溢出了
-            if (H.length() > cpu.getRegisterByName(this.getArgv(1).getValue()).getLength()) {
-                Log4j.i(this.getClass(), "ADD OVERFLOW");
-                //丢弃最高位
-                H = H.substring(H.length() - cpu.getRegisterByName(this.getArgv(1).getValue()).getLength(), H.length());
-                //设置符号位 和溢出位
-                try {
-                    cpu.getRegisterByName("FR").setBits("11111111");
-                } catch (Exception ex) {
-                    Log4j.i(this.getClass(),"Flag Register FR Not FOUND "+ex.getMessage());
-                }
-            }
+            String H = bitsB;
             cpu.getRegisterByName(this.getArgv(1).getValue()).setBits(StringUtil.plusZero(H, cpu.getRegisterByName(this.getArgv(1).getValue()).getLength()));
         } catch (BitsException ex) {
             Log4j.i(this.getClass(), ex.getMessage());

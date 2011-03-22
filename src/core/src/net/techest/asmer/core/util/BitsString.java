@@ -11,10 +11,17 @@ package net.techest.asmer.core.util;
  */
 public class BitsString {
     
-        public static String add(String bitsStringA,String bitsStringB){
+        public static String plus(String bitsStringA,String bitsStringB){
                 Long a=Long.parseLong(bitsStringA, 2);
                 Long b=Long.parseLong(bitsStringB, 2);
                 Long c=a+b;
+                return Long.toBinaryString(c);
+        }
+
+        public static String minus(String bitsStringA,String bitsStringB){
+                Long a=Long.parseLong(bitsStringA, 2);
+                Long b=Long.parseLong(bitsStringB, 2);
+                Long c=a-b;
                 return Long.toBinaryString(c);
         }
 }

@@ -22,6 +22,7 @@ import net.techest.asmer.core.cpu.ins.InstructionBase;
 import net.techest.asmer.core.cpu.ins.InstructionWorker;
 import net.techest.asmer.core.cpu.register.Register;
 import net.techest.asmer.core.cpu.register.RegisterWorker;
+import net.techest.asmer.core.exceptions.ArgsException;
 import net.techest.asmer.core.exceptions.InsException;
 import net.techest.asmer.core.util.Log4j;
 import net.techest.asmer.core.util.StringUtil;
@@ -47,18 +48,22 @@ public abstract class CPUBase {
 
     public abstract void LoadIns();
 
-    public void execute(String ins){
+    public void execute(String ins) throws InsException{
         //第一步 读取指令名称
         String insName=StringUtil.findMc(ins,"(\\S*?)\\s",1);
         Log4j.i(this.getClass(),"Instruction detected "+insName);
         InstructionBase ir=null;
         try {
-            //让指令检查是否存在此指令
+            //检查是否存在此指令
             ir =irs.getByName(insName);
             //检查指令参数
             ir.check(ins);
         } catch (InsException ex) {
             Log4j.e(this.getClass(),"insName"+ ex.getMessage());
+            throw new InsException(ex.getMessage());
+        }catch (ArgsException ex) {
+            Log4j.e(this.getClass(),"ArgsException "+ ex.getMessage());
+            throw new InsException(ex.getMessage());
         }
         
         ir.execute();

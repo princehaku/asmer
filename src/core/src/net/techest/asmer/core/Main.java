@@ -20,8 +20,11 @@ package net.techest.asmer.core;
 
 
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.techest.asmer.core.cpu.CPU8086;
 import net.techest.asmer.core.cpu.CPUBase;
+import net.techest.asmer.core.exceptions.InsException;
 
 /**
  *
@@ -35,7 +38,13 @@ public class Main {
     public static void main(String[] args) {
         Asmer as=new Asmer();
         CPUBase cpu =new CPU8086();
-        cpu.execute("ADD AX,BX");
+        try {
+            cpu.execute("ADD AX,AA0FH");
+            cpu.execute("MOV BX,AA0FH");
+            cpu.execute("SUB AX,BX");
+        } catch (InsException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
