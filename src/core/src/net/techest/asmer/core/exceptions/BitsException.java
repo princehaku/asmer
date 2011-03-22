@@ -5,7 +5,7 @@
 
 package net.techest.asmer.core.exceptions;
 
-/**
+/**位元异常类
  *
  * @author princehaku
  */

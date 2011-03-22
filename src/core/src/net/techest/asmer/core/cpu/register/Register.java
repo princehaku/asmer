@@ -17,13 +17,11 @@
  */
 package net.techest.asmer.core.cpu.register;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.techest.asmer.core.exceptions.BitsException;
 import net.techest.asmer.core.util.Log4j;
 import net.techest.asmer.core.util.StringUtil;
 
-/**
+/**寄存器类
  *
  * @author princehaku
  */
@@ -31,13 +29,14 @@ public class Register implements RegisterInterface {
 
     protected String name = "";
     protected int length = 0;
-    protected String bits = "";
+    protected String bitsString = "";
     protected RegisterWorker registers = new RegisterWorker();
     protected boolean protect = false;
+    
     /**
      *
-     * @param name
-     * @param length
+     * @param name 寄存器名称 比如AX BX
+     * @param length 寄存器位元大小
      */
     Register(String name, int length) {
         this.name = name;
@@ -63,8 +62,14 @@ public class Register implements RegisterInterface {
      * @throws BitsException
      */
     public void setBits(String bits) throws BitsException {
-        if (bits.length() != this.length || protect) {
-            throw new BitsException("Set Bits Error , Length incorrect or been protected");
+        if( protect){
+            throw new BitsException("Set Bits Error , been protected");
+        }
+        if (bits.length() != this.length ) {
+            throw new BitsException("Set Bits Error , Length incorrect "+bits.length());
+        }
+        if (!bits.replaceAll("0","").replaceAll("1","").equals("")) {
+            throw new BitsException("Set Bits Error , Only can be 0 or 1");
         }
         int r = 0;
         for (int i = 0; i < this.registers.size(); i++) {
@@ -73,11 +78,14 @@ public class Register implements RegisterInterface {
             rtmp.setBits(bits.substring(r, r + rtmp.getLength()));
             r = r + rtmp.getLength();
         }
-        this.bits = bits;
+        
+        Log4j.i(this.getClass(),this.getName() + " set as " +bits);
+
+        this.bitsString = bits;
     }
 
     /**组合一个寄存器进入
-     * 先进入的在前面
+     * 先进入的在前面比如 AX = AH + AL
      * @param e
      * @return
      */
@@ -85,7 +93,7 @@ public class Register implements RegisterInterface {
         registers.add(e);
         //调整组合寄存器的属性
         this.length += e.length;
-        this.bits = e.getBits() + bits;
+        this.bitsString = e.getBits() + bitsString;
         return true;
     }
 
@@ -102,7 +110,7 @@ public class Register implements RegisterInterface {
      * @return
      */
     public String getBits() {
-        return this.bits;
+        return this.bitsString;
     }
 
     /**移除组合寄存器中的一个
@@ -113,7 +121,7 @@ public class Register implements RegisterInterface {
         boolean isRemoved = registers.remove(e);
         Log4j.i(this.getClass(),e.getName() + " removed , bits reseted ");
         this.length -= e.length;
-        this.bits   =  "";
+        this.bitsString   =  "";
         return isRemoved;
     }
 }

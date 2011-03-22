@@ -7,8 +7,8 @@ package net.techest.asmer.core.cpu.register;
 
 import java.util.ArrayList;
 
-/**
- *
+/**寄存器工作站
+ * 负责分发和注册寄存器
  * @author princehaku
  */
 public class RegisterWorker extends ArrayList<Register>{

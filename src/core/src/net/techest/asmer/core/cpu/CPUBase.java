@@ -26,7 +26,7 @@ import net.techest.asmer.core.exceptions.InsException;
 import net.techest.asmer.core.util.Log4j;
 import net.techest.asmer.core.util.StringUtil;
 
-/**
+/**CPU基类 所有CPU必须由它派生
  *
  * @author princehaku
  */

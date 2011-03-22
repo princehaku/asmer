@@ -10,6 +10,16 @@ package net.techest.asmer.core.cpu;
  * @author princehaku
  */
 public enum ArgsType {
+    /**寄存器
+     *
+     */
     REGISTER,
-    ROM
+    /**主存
+     *
+     */
+    ROM,
+    /**立即数
+     *
+     */
+    INSNUMBER
 }

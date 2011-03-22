@@ -8,8 +8,8 @@ package net.techest.asmer.core.cpu.ins;
 import net.techest.asmer.core.exceptions.InsException;
 import java.util.ArrayList;
 
-/**
- *
+/**指令工作站
+ * 负责分发和注册指令
  * @author princehaku
  */
 public class InstructionWorker extends ArrayList<InstructionBase>{

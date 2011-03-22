@@ -18,10 +18,8 @@
 
 package net.techest.asmer.core.cpu.ins;
 
-import net.techest.asmer.core.cpu.Args;
-
-/**
- *
+/**所有指令都必须实现的接口
+ * 已经被基类继承
  * @author princehaku
  */
 public interface InstructionInterface {

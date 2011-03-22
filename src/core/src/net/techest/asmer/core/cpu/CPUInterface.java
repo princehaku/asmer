@@ -18,8 +18,8 @@
 
 package net.techest.asmer.core.cpu;
 
-/**
- *
+/**所有CPU都应该完成的接口
+ * 已经被基类继承
  * @author princehaku
  */
 public interface CPUInterface {

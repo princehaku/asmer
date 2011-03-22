@@ -18,7 +18,7 @@
 
 package net.techest.asmer.core.exceptions;
 
-/**
+/**指令异常类
  *
  * @author princehaku
  */
