@@ -18,20 +18,22 @@
 
 package net.techest.asmer.core.cpu;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.techest.asmer.core.cpu.ins.*;
 import net.techest.asmer.core.cpu.register.RegisterFactory;
-import net.techest.asmer.core.exceptions.BitsException;
 
 /**160166的实现类
  *
  * @author princehaku
  */
 public class CPU8086 extends CPUBase{
-
+    
     @Override
-    public void LoadReg() {
+    public void loadAnalyzer() {
+        this.anayzer=new Analyzer8086(this);
+    }
+    
+    @Override
+    public void loadReg() {
         //数据寄存器
         regs.add(RegisterFactory.build("AH", 8));
         regs.add(RegisterFactory.build("BH", 8));
@@ -62,7 +64,7 @@ public class CPU8086 extends CPUBase{
     }
 
     @Override
-    public void LoadIns() {
+    public void loadIns() {
         irs.add(new InstructionADD(this));
         irs.add(new InstructionSUB(this));
         irs.add(new InstructionMOV(this));
@@ -73,5 +75,6 @@ public class CPU8086 extends CPUBase{
         //TODO :  CPU writeBack
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
 
 }

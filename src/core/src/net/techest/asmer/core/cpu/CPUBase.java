@@ -36,17 +36,28 @@ public abstract class CPUBase {
     protected InstructionWorker irs;
     
     protected RegisterWorker regs;
+    
+    protected AnalyzerBase anayzer;
 
     public CPUBase(){
         regs=new RegisterWorker();
         irs= new InstructionWorker();
-        LoadReg();
-        LoadIns();
+        loadAnalyzer();
+        loadReg();
+        loadIns();
     }
-    
-    public abstract void LoadReg();
-
-    public abstract void LoadIns();
+    /**读取指令分析器
+     *
+     */
+    public abstract void loadAnalyzer();
+    /**读取寄存器
+     *
+     */
+    public abstract void loadReg();
+    /**读取指令
+     *
+     */
+    public abstract void loadIns();
 
     public void execute(String ins) throws InsException{
         //第一步 读取指令名称
@@ -81,5 +92,12 @@ public abstract class CPUBase {
 
             }
         return null;
+    }
+
+    public AnalyzerBase getAnalyzer() throws Exception {
+        if(this.anayzer==null){
+            throw new Exception(this.getClass().getName()+" No Analyzer Loaded");
+        }
+        return this.anayzer;
     }
 }

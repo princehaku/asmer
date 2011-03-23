@@ -17,7 +17,6 @@
  */
 package net.techest.asmer.core.cpu;
 
-import com.sun.org.apache.xerces.internal.impl.dv.util.HexBin;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,42 +28,18 @@ import net.techest.asmer.core.util.Log4j;
  *
  * @author princehaku
  */
-public class Analyzer {
+public abstract class AnalyzerBase {
 
     ArrayList<Args> args;
+    
     CPUBase cpu;
 
-    public Analyzer(CPUBase cpu) {
+    public AnalyzerBase(CPUBase cpu) {
         this.cpu = cpu;
         args = new ArrayList<Args>();
     }
 
-    private Args parse(String s) throws ArgsException {
-        Args arg = new Args();
-        Register register = cpu.getRegisterByName(s);
-        try {
-            //寄存器查询
-            if (register != null) {
-                arg.setType(ArgsType.REGISTER);
-                arg.setValue(s);
-                Log4j.i(this.getClass(), "Register " + s + " detected");
-            }
-            //TODO:ROM表查询
-
-            //立即数转换
-            if (s.indexOf("H") != -1) {
-                Long h = Long.parseLong(s.replace("H", ""), 16);
-                arg.setType(ArgsType.INSNUMBER);
-                arg.setValue(Long.toBinaryString(h));
-            }
-        } catch (Exception ex) {
-            throw new ArgsException("Parse Error");
-        }
-        if (arg.getValue() != null) {
-            args.add(arg);
-        }
-        return arg;
-    }
+    abstract  Args parse(String s) throws ArgsException ;
 
     /**分析参数
      *

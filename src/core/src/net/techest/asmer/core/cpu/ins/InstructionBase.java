@@ -18,9 +18,11 @@
 
 package net.techest.asmer.core.cpu.ins;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.techest.asmer.core.exceptions.ArgsException;
 import java.util.ArrayList;
-import net.techest.asmer.core.cpu.Analyzer;
+import net.techest.asmer.core.cpu.AnalyzerBase;
 import net.techest.asmer.core.cpu.Args;
 import net.techest.asmer.core.cpu.CPUBase;
 import net.techest.asmer.core.util.Log4j;
@@ -103,7 +105,13 @@ public abstract class InstructionBase implements InstructionInterface{
         
         Log4j.i(this.getClass(), pattenAny);
         //使用寻址器分析参数
-        Analyzer any=new Analyzer(cpu);
+        AnalyzerBase any=null;
+
+        try {
+            any = cpu.getAnalyzer();
+        } catch (Exception ex) {
+            throw new ArgsException(ex.getMessage());
+        }
         
         args=any.parse(ins,pattenAny);
 
