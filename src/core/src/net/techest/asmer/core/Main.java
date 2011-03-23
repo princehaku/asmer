@@ -39,8 +39,8 @@ public class Main {
         CPUBase cpu =new CPU8086();
         try {
             cpu.execute("ADD AX,0001H");
-            cpu.execute("MOV BX,AA0FH");
-            cpu.execute("SUB AX,BX");
+            cpu.execute("MOV BX,0003H");
+            cpu.execute("ADD AX,BX");
         } catch (InsException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }

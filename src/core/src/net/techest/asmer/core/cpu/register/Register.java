@@ -33,7 +33,6 @@ public class Register implements RegisterInterface {
     protected String bitsString = "";
     protected RegisterWorker registers = new RegisterWorker();
     protected boolean protect = false;
-    private Register parentRegister;
     /**
      *
      * @param name 寄存器名称 比如AX BX
@@ -80,10 +79,6 @@ public class Register implements RegisterInterface {
             r = r + rtmp.getLength();
         }
         
-        if(parentRegister!=null){
-            parentRegister.updateFromChild(this,bits);
-        }
-        
         Log4j.i(this.getClass(),this.getName() + " set as " +bits);
     }
 
@@ -96,9 +91,8 @@ public class Register implements RegisterInterface {
         registers.add(e);
         //调整组合寄存器的属性
         this.length += e.length;
-        this.bitsString = e.getBits() + bitsString;
+        this.bitsString = bitsString+e.getBits();
         this.reset();
-        e.registerParent(this);
         return true;
     }
     /**将所有位设为0
@@ -124,6 +118,13 @@ public class Register implements RegisterInterface {
      * @return
      */
     public String getBits() {
+        if(this.registers.size()>0){
+            this.bitsString="";
+            for (int i = 0; i < this.registers.size(); i++) {
+                Register rtmp = this.registers.get(i);
+                this.bitsString=this.bitsString+rtmp.getBits();
+            }
+        }
         return this.bitsString;
     }
 
@@ -148,34 +149,5 @@ public class Register implements RegisterInterface {
      */
     public void setProtect(boolean protect) {
         this.protect = protect;
-    }
-    /**注册父寄存器
-     *
-     * @param aThis
-     */
-    private void registerParent(Register aThis) {
-        parentRegister=aThis;
-    }
-    /**从子寄存器的更新请求
-     *
-     * @param aThis
-     * @param bits
-     */
-    private void updateFromChild(Register aThis, String bits) {
-        int r=0;
-        for (int i = 0; i < this.registers.size(); i++) {
-            Register rtmp = this.registers.get(i);
-            if(aThis==rtmp){
-                    String needTo=this.bitsString.substring(r, r + bits.length());
-                    //如果父的已经相同 则不修改
-                        Log4j.i(this.getClass(), "no change to Parent "+needTo+" == "+bits);
-                    if(needTo.equals(bits)){
-                        return;
-                    }
-                    this.bitsString=this.bitsString.substring(0, r)+bits+this.bitsString.substring(r + bits.length(),this.bitsString.length());
-                    Log4j.i(this.getClass(), "Parent Register "+this.getName()+" set as "+this.bitsString);
-            }
-            r = r + rtmp.getLength();
-        }
     }
 }

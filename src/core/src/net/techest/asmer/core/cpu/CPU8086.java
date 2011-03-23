@@ -18,8 +18,11 @@
 
 package net.techest.asmer.core.cpu;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.techest.asmer.core.cpu.ins.*;
 import net.techest.asmer.core.cpu.register.RegisterFactory;
+import net.techest.asmer.core.exceptions.BitsException;
 
 /**160166的实现类
  *

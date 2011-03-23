@@ -29,7 +29,7 @@ public class RegisterFactory {
     
         public  static Register build(String name,int length){
             Register r=new  Register(name,length) ;
-            Log4j.i(RegisterFactory.class,"Register Build "+name +" bits length "+length);
+            Log4j.i(RegisterFactory.class,"Register Build "+name +" bit length "+length);
             return r;
         }
         /**创建一个组合寄存器
@@ -43,7 +43,7 @@ public class RegisterFactory {
             Register r=new  Register(name,0) ;
             r.add(A);
             r.add(B);
-            Log4j.i(RegisterFactory.class,"Register Build "+name+" From "+A.getName()+" & "+B.getName() +" bits length "+r.length);
+            Log4j.i(RegisterFactory.class,"Register Build "+name+" From "+A.getName()+" & "+B.getName() +" bit length "+r.length);
             return r;
         }
 
