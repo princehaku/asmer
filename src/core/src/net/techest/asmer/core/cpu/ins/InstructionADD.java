@@ -15,6 +15,7 @@
  *  Created on : 2011-3-17, 11:32:09
  *  Author     : princehaku
  */
+
 package net.techest.asmer.core.cpu.ins;
 
 import net.techest.asmer.core.cpu.ArgsType;

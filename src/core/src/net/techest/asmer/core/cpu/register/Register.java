@@ -15,6 +15,7 @@
  *  Created on : 2011-3-14, 13:34:52
  *  Author     : princehaku
  */
+
 package net.techest.asmer.core.cpu.register;
 
 import net.techest.asmer.core.exceptions.BitsException;
@@ -32,7 +33,7 @@ public class Register implements RegisterInterface {
     protected String bitsString = "";
     protected RegisterWorker registers = new RegisterWorker();
     protected boolean protect = false;
-    
+    private Register parentRegister;
     /**
      *
      * @param name 寄存器名称 比如AX BX
@@ -52,13 +53,14 @@ public class Register implements RegisterInterface {
         return name;
     }
 
-    /**设置寄存器的内容
+    /**递归设置寄存器的内容
      *
      * @param bits
      * @throws BitsException
      */
     public void setBits(String bits) throws BitsException {
-        if( protect){
+        
+        if (protect){
             throw new BitsException(this.getName()+" Set Bits Error , been protected");
         }
         if (bits.length() != this.length ) {
@@ -70,14 +72,18 @@ public class Register implements RegisterInterface {
         
         int r = 0;
         
+        this.bitsString = bits;
+        
         for (int i = 0; i < this.registers.size(); i++) {
             Register rtmp = this.registers.get(i);
             rtmp.setBits(bits.substring(r, r + rtmp.getLength()));
             r = r + rtmp.getLength();
         }
         
-        this.bitsString = bits;
-
+        if(parentRegister!=null){
+            parentRegister.updateFromChild(this,bits);
+        }
+        
         Log4j.i(this.getClass(),this.getName() + " set as " +bits);
     }
 
@@ -92,6 +98,7 @@ public class Register implements RegisterInterface {
         this.length += e.length;
         this.bitsString = e.getBits() + bitsString;
         this.reset();
+        e.registerParent(this);
         return true;
     }
     /**将所有位设为0
@@ -130,5 +137,45 @@ public class Register implements RegisterInterface {
         this.length -= e.length;
         this.bitsString   =  "";
         return isRemoved;
+    }
+
+    public boolean isProtect() {
+        return protect;
+    }
+    /**设置寄存器保护
+     * 被保护的寄存器只能读不能写
+     * @param protect
+     */
+    public void setProtect(boolean protect) {
+        this.protect = protect;
+    }
+    /**注册父寄存器
+     *
+     * @param aThis
+     */
+    private void registerParent(Register aThis) {
+        parentRegister=aThis;
+    }
+    /**从子寄存器的更新请求
+     *
+     * @param aThis
+     * @param bits
+     */
+    private void updateFromChild(Register aThis, String bits) {
+        int r=0;
+        for (int i = 0; i < this.registers.size(); i++) {
+            Register rtmp = this.registers.get(i);
+            if(aThis==rtmp){
+                    String needTo=this.bitsString.substring(r, r + bits.length());
+                    //如果父的已经相同 则不修改
+                        Log4j.i(this.getClass(), "no change to Parent "+needTo+" == "+bits);
+                    if(needTo.equals(bits)){
+                        return;
+                    }
+                    this.bitsString=this.bitsString.substring(0, r)+bits+this.bitsString.substring(r + bits.length(),this.bitsString.length());
+                    Log4j.i(this.getClass(), "Parent Register "+this.getName()+" set as "+this.bitsString);
+            }
+            r = r + rtmp.getLength();
+        }
     }
 }

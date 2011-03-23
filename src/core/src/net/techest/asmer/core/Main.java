@@ -1,5 +1,3 @@
-package net.techest.asmer.core;
-
 /*  Copyright 2010 princehaku
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +16,7 @@ package net.techest.asmer.core;
  *  Author     : princehaku
  */
 
-
+package net.techest.asmer.core;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,6 +28,7 @@ import net.techest.asmer.core.exceptions.InsException;
  *
  * @author princehaku
  */
+
 public class Main {
 
     /**
@@ -39,7 +38,7 @@ public class Main {
         Asmer as=new Asmer();
         CPUBase cpu =new CPU8086();
         try {
-            cpu.execute("ADD AX,AA0FH");
+            cpu.execute("ADD AX,0001H");
             cpu.execute("MOV BX,AA0FH");
             cpu.execute("SUB AX,BX");
         } catch (InsException ex) {

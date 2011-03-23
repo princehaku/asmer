@@ -21,7 +21,7 @@ package net.techest.asmer.core.cpu.register;
 import java.util.Collection;
 import net.techest.asmer.core.util.Log4j;
 
-/**
+/**寄存器构造工厂
  *
  * @author princehaku
  */

@@ -12,14 +12,12 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  *
- *  Created on : 2011-3-17, 11:32:09
+ *  Created on : 2011-3-22, 11:32:09
  *  Author     : princehaku
  */
+
 package net.techest.asmer.core.cpu.ins;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import net.techest.asmer.core.cpu.Args;
 import net.techest.asmer.core.cpu.ArgsType;
 import net.techest.asmer.core.cpu.CPUBase;
 import net.techest.asmer.core.exceptions.BitsException;

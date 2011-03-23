@@ -1,6 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Copyright (c) 2010 princehaku
+ * All right reserved.
+ * Author princehaku
+ * Site http://3haku.net
+ * Created on : 2011-3-22, 23:04:19
  */
 
 package net.techest.asmer.core.util;

@@ -12,28 +12,35 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  *
- *  Created on : 2011-3-11, 14:31:28
+ *  Created on : 2011-3-22, 11:31:28
  *  Author     : princehaku
  */
 
-package net.techest.asmer.core.cpu.register;
+package net.techest.asmer.core.rom;
 
-import java.util.ArrayList;
-
-/**寄存器工作站
- * 负责分发和注册寄存器
+/**
+ *
  * @author princehaku
  */
-public class RegisterWorker extends ArrayList<Register>{
+public class RomBase implements RomInterface{
     
-    public Register getByName(String name){
-            for(int i=0;i<this.size();i++){
-                if(this.get(i).getName().equals(name))
-                {
-                    return this.get(i);
-                }
+    private int size;
 
-            }
-        return null;
+    public void setSize(int size) {
+        this.size = size;
     }
+
+    public int getSize() {
+        return size;
+    }
+
+    public String readBlock(int pos) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void writeBlock(int pos, String value) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    
 }

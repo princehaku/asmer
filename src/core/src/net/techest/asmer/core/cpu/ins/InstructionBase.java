@@ -15,6 +15,7 @@
  *  Created on : 2011-3-6, 21:57:15
  *  Author     : princehaku
  */
+
 package net.techest.asmer.core.cpu.ins;
 
 import net.techest.asmer.core.exceptions.ArgsException;
@@ -22,7 +23,6 @@ import java.util.ArrayList;
 import net.techest.asmer.core.cpu.Analyzer;
 import net.techest.asmer.core.cpu.Args;
 import net.techest.asmer.core.cpu.CPUBase;
-import net.techest.asmer.core.exceptions.InsException;
 import net.techest.asmer.core.util.Log4j;
 import net.techest.asmer.core.util.StringUtil;
 
@@ -102,7 +102,7 @@ public abstract class InstructionBase implements InstructionInterface{
         this.setPattren(pattren);
         
         Log4j.i(this.getClass(), pattenAny);
-        //使用cpu的寻址器分析地址
+        //使用寻址器分析参数
         Analyzer any=new Analyzer(cpu);
         
         args=any.parse(ins,pattenAny);
