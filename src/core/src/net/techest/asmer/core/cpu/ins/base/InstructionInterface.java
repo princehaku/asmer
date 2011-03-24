@@ -12,30 +12,23 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  *
- *  Created on : 2011-3-22, 11:32:09
+ *  Created on : 2011-3-21, 17:32:32
  *  Author     : princehaku
  */
 
-package net.techest.asmer.core.cpu.ins;
+package net.techest.asmer.core.cpu.ins.base;
 
+import net.techest.asmer.core.exceptions.ArgsException;
 import net.techest.asmer.core.exceptions.InsException;
-import java.util.ArrayList;
 
-/**指令工作站
- * 负责注册,分发指令
+/**所有指令都必须实现的接口
+ * 已经被基类继承
  * @author princehaku
  */
-public class InstructionWorker extends ArrayList<InstructionBase>{
+public interface InstructionInterface {
 
-    public InstructionBase getByName (String name) throws InsException{
-            for(int i=0;i<this.size();i++){
-                if(this.get(i).getName().equals(name))
-                {
-                    return this.get(i);
-                }
+    void check(String ins) throws ArgsException;
 
-            }
-        throw new InsException("Ins Not Found");
-    }
+    void execute() throws InsException ;
 
 }

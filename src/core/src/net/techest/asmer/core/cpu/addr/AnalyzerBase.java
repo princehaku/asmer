@@ -15,11 +15,13 @@
  *  Created on : 2011-3-18, 20:47:59
  *  Author     : princehaku
  */
-package net.techest.asmer.core.cpu;
+package net.techest.asmer.core.cpu.addr;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import net.techest.asmer.core.cpu.Args;
+import net.techest.asmer.core.cpu.CPUBase;
 import net.techest.asmer.core.cpu.register.Register;
 import net.techest.asmer.core.exceptions.ArgsException;
 import net.techest.asmer.core.util.Log4j;

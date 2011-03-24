@@ -24,14 +24,10 @@ package net.techest.asmer.core.rom;
  */
 public class RomBase implements RomInterface{
     
-    private int size;
-
-    public void setSize(int size) {
-        this.size = size;
-    }
+    private int addrLength;
 
     public int getSize() {
-        return size;
+        return 2^addrLength;
     }
 
     public String readBlock(int pos) {

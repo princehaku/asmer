@@ -18,7 +18,10 @@
 
 package net.techest.asmer.core.cpu;
 
-import net.techest.asmer.core.cpu.ins.*;
+import net.techest.asmer.core.cpu.ins.InstructionSUB;
+import net.techest.asmer.core.cpu.ins.InstructionMOV;
+import net.techest.asmer.core.cpu.addr.Analyzer8086;
+import net.techest.asmer.core.cpu.ins.InstructionADD;
 import net.techest.asmer.core.cpu.register.RegisterFactory;
 
 /**160166的实现类

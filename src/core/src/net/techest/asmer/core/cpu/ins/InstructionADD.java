@@ -20,6 +20,7 @@ package net.techest.asmer.core.cpu.ins;
 
 import net.techest.asmer.core.cpu.ArgsType;
 import net.techest.asmer.core.cpu.CPUBase;
+import net.techest.asmer.core.cpu.ins.base.InstructionBase;
 import net.techest.asmer.core.exceptions.BitsException;
 import net.techest.asmer.core.exceptions.InsException;
 import net.techest.asmer.core.util.BitsString;

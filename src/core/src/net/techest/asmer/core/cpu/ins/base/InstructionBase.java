@@ -16,13 +16,13 @@
  *  Author     : princehaku
  */
 
-package net.techest.asmer.core.cpu.ins;
+package net.techest.asmer.core.cpu.ins.base;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.techest.asmer.core.exceptions.ArgsException;
 import java.util.ArrayList;
-import net.techest.asmer.core.cpu.AnalyzerBase;
+import net.techest.asmer.core.cpu.addr.AnalyzerBase;
 import net.techest.asmer.core.cpu.Args;
 import net.techest.asmer.core.cpu.CPUBase;
 import net.techest.asmer.core.util.Log4j;

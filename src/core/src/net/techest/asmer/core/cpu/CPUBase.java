@@ -18,8 +18,9 @@
 
 package net.techest.asmer.core.cpu;
 
-import net.techest.asmer.core.cpu.ins.InstructionBase;
-import net.techest.asmer.core.cpu.ins.InstructionWorker;
+import net.techest.asmer.core.cpu.addr.AnalyzerBase;
+import net.techest.asmer.core.cpu.ins.base.InstructionBase;
+import net.techest.asmer.core.cpu.ins.base.InstructionWorker;
 import net.techest.asmer.core.cpu.register.Register;
 import net.techest.asmer.core.cpu.register.RegisterWorker;
 import net.techest.asmer.core.exceptions.ArgsException;

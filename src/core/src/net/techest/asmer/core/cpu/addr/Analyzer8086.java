@@ -16,8 +16,11 @@
  *  Author     : princehaku
  */
 
-package net.techest.asmer.core.cpu;
+package net.techest.asmer.core.cpu.addr;
 
+import net.techest.asmer.core.cpu.Args;
+import net.techest.asmer.core.cpu.ArgsType;
+import net.techest.asmer.core.cpu.CPUBase;
 import net.techest.asmer.core.cpu.register.Register;
 import net.techest.asmer.core.exceptions.ArgsException;
 import net.techest.asmer.core.util.Log4j;
@@ -27,21 +30,26 @@ import net.techest.asmer.core.util.Log4j;
  * @author princehaku
  */
 public class Analyzer8086 extends AnalyzerBase {
-    Analyzer8086(CPUBase cpu){
+
+    
+    public Analyzer8086(CPUBase cpu){
         super(cpu);
     }
 
     protected Args parse(String s) throws ArgsException {
+        
         Args arg = new Args();
-        Register register = cpu.getRegisterByName(s);
+        
         try {
+            Register register = cpu.getRegisterByName(s);
             //寄存器
             if (register != null) {
                 arg.setType(ArgsType.REGISTER);
                 arg.setValue(s);
                 Log4j.i(this.getClass(), "Register " + s + " detected");
             }
-            //TODO:寄存器寻址
+            //寄存器间接寻址
+            
 
             //TODO:ROM表查询
 
