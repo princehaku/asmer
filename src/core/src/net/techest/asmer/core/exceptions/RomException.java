@@ -13,35 +13,18 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  * 
- *  Created on : 2011-3-6, 21:33:38
+ *  Created on : 2011-3-24, 18:12:46
  *  Author     : princehaku
  */
-package net.techest.asmer.core.cpu;
+package net.techest.asmer.core.exceptions;
 
 /**
- * 所有CPU都应该完成的接口
- * 已经被基类继承
+ * 
  * @author princehaku
  */
-public interface CPUInterface {
-  /**
-   * 提取
-   */
-  void fetch() ;
-
-  /**
-   * 解码
-   */
-  void decode() ;
-
-  /**
-   * 执行
-   */
-  void execute(String ins) ;
-
-  /**
-   * 写回
-   */
-  void writeback() ;
+public class RomException extends Exception {
+  public RomException(String string) {
+        super(string);
+  }
 
 }
