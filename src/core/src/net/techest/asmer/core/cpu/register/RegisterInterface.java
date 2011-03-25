@@ -28,6 +28,6 @@ public interface RegisterInterface {
 
   String getBits() ;
 
-  void setBits(String bits) throws net.techest.asmer.core.exceptions.BitsException ;
+  void setBits(String bits) throws BitsException ;
 
 }

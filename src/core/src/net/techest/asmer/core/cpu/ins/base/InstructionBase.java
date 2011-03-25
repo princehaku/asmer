@@ -43,7 +43,7 @@ public abstract class InstructionBase implements InstructionInterface {
    * 指令参数
    * 
    */
-  ArrayList<net.techest.asmer.core.cpu.Args> args;
+  ArrayList<Args> args;
 
   /**
    * 指令模式串 不匹配的将作为非正常指令
@@ -57,13 +57,13 @@ public abstract class InstructionBase implements InstructionInterface {
    */
   protected int argvLength;
 
-  protected net.techest.asmer.core.cpu.CPUBase cpu;
+  protected CPUBase cpu;
 
-  protected net.techest.asmer.core.cpu.CPUBase getCpu() {
+  protected CPUBase getCpu() {
         return cpu;
   }
 
-  public InstructionBase(net.techest.asmer.core.cpu.CPUBase aThis) {
+  public InstructionBase(CPUBase aThis) {
         cpu=aThis;
         args=new ArrayList<Args>();
         pattren="";
@@ -97,7 +97,7 @@ public abstract class InstructionBase implements InstructionInterface {
         this.pattren = pattren;
   }
 
-  public void check(String ins) throws net.techest.asmer.core.exceptions.ArgsException {
+  public void check(String ins) throws ArgsException {
 
         //更具逗号 设定指令长度
         this.setArgvLength(StringUtil.occurTimes(ins,",")+1);
@@ -130,7 +130,7 @@ public abstract class InstructionBase implements InstructionInterface {
 
   }
 
-  protected net.techest.asmer.core.cpu.Args getArgv(int i) {
+  protected Args getArgv(int i) {
         return this.args.get(i-1);
   }
 

@@ -16,12 +16,8 @@
  *  Created on : 2011-3-23, 18:07:24
  *  Author     : princehaku
  */
-package net.techest.asmer.core.cpu.addr;
+package net.techest.asmer.core.addr;
 
-import net.techest.asmer.core.cpu.Args;
-import net.techest.asmer.core.cpu.ArgsType;
-import net.techest.asmer.core.cpu.CPUBase;
-import net.techest.asmer.core.cpu.register.Register;
 import net.techest.asmer.core.exceptions.ArgsException;
 import net.techest.asmer.core.util.Log4j;
 /**
@@ -29,11 +25,11 @@ import net.techest.asmer.core.util.Log4j;
  * @author princehaku
  */
 public class Analyzer8086 extends AnalyzerBase {
-  public Analyzer8086(net.techest.asmer.core.cpu.CPUBase cpu) {
+  public Analyzer8086(CPUBase cpu) {
         super(cpu);
   }
 
-  protected net.techest.asmer.core.cpu.Args parse(String s) throws net.techest.asmer.core.exceptions.ArgsException {
+  protected Args parse(String s) throws net.techest.asmer.core.exceptions.ArgsException {
         
         Args arg = new Args();
         

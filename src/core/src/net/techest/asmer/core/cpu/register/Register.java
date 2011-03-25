@@ -63,7 +63,7 @@ public class Register implements RegisterInterface {
    * @param bits
    * @throws BitsException
    */
-  public void setBits(String bits) throws net.techest.asmer.core.exceptions.BitsException {
+  public void setBits(String bits) throws BitsException {
         
         if (protect){
             throw new BitsException(this.getName()+" Set Bits Error , been protected");

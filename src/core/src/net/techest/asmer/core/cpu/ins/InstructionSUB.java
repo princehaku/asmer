@@ -30,13 +30,13 @@ import net.techest.asmer.core.util.StringUtil;
  * 
  * @author princehaku
  */
-public class InstructionSUB extends net.techest.asmer.core.cpu.ins.base.InstructionBase {
-  public InstructionSUB(net.techest.asmer.core.cpu.CPUBase aThis) {
+public class InstructionSUB extends InstructionBase {
+  public InstructionSUB(CPUBase aThis) {
         super(aThis);
         this.setName("SUB");
   }
 
-  public void execute() throws net.techest.asmer.core.exceptions.InsException {
+  public void execute() throws InsException {
         String bitsA = "";
         String bitsB = "";
         if (this.getArgv(1).getType() == ArgsType.REGISTER && this.getArgv(2).getType() == ArgsType.REGISTER) {

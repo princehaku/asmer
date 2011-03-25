@@ -32,16 +32,16 @@ import net.techest.asmer.core.util.Log4j;
  * @author princehaku
  */
 public abstract class AnalyzerBase {
-  ArrayList<net.techest.asmer.core.cpu.Args> args;
+  ArrayList<Args> args;
 
-  net.techest.asmer.core.cpu.CPUBase cpu;
+  CPUBase cpu;
 
-  public AnalyzerBase(net.techest.asmer.core.cpu.CPUBase cpu) {
+  public AnalyzerBase(CPUBase cpu) {
         this.cpu = cpu;
         args = new ArrayList<Args>();
   }
 
-  abstract net.techest.asmer.core.cpu.Args parse(String s) throws net.techest.asmer.core.exceptions.ArgsException ;
+  abstract Args parse(String s) throws ArgsException ;
 
   /**
    * 分析参数
@@ -50,7 +50,7 @@ public abstract class AnalyzerBase {
    * @param pattren
    * @return
    */
-  public ArrayList<net.techest.asmer.core.cpu.Args> parse(String ins, String pattren) throws net.techest.asmer.core.exceptions.ArgsException {
+  public ArrayList<Args> parse(String ins, String pattren) throws ArgsException {
 
         args = new ArrayList<Args>();
 

@@ -26,7 +26,7 @@ import java.util.ArrayList;
  * @author princehaku
  */
 public class InstructionWorker extends ArrayList<InstructionBase> {
-  public InstructionBase getByName(String name) throws net.techest.asmer.core.exceptions.InsException {
+  public InstructionBase getByName(String name) throws InsException {
             for(int i=0;i<this.size();i++){
                 if(this.get(i).getName().equals(name))
                 {

@@ -26,8 +26,8 @@ import net.techest.asmer.core.exceptions.InsException;
  * @author princehaku
  */
 public interface InstructionInterface {
-  void check(String ins) throws net.techest.asmer.core.exceptions.ArgsException ;
+  void check(String ins) throws ArgsException ;
 
-  void execute() throws net.techest.asmer.core.exceptions.InsException ;
+  void execute() throws InsException ;
 
 }

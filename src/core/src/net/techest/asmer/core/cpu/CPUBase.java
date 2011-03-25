@@ -34,13 +34,13 @@ import net.techest.asmer.core.util.StringUtil;
  * @author princehaku
  */
 public abstract class CPUBase {
-  protected net.techest.asmer.core.cpu.ins.base.InstructionWorker irs;
+  protected InstructionWorker irs;
 
-  protected net.techest.asmer.core.cpu.register.RegisterWorker regs;
+  protected RegisterWorker regs;
 
-  protected net.techest.asmer.core.cpu.addr.AnalyzerBase anayzer;
+  protected AnalyzerBase anayzer;
 
-  protected net.techest.asmer.core.rom.RomBase rom;
+  protected RomBase rom;
 
   public CPUBase() {
         Log4j.i(this.getClass(), "=============  CPU INIT START =============");
@@ -77,7 +77,7 @@ public abstract class CPUBase {
    */
   public abstract void loadRom() ;
 
-  public void execute(String ins) throws net.techest.asmer.core.exceptions.InsException {
+  public void execute(String ins) throws InsException {
         //第一步 读取指令名称
         String insName=StringUtil.findMc(ins,"(\\S*?)\\s",1);
         Log4j.i(this.getClass(),"Instruction detected "+insName);
@@ -101,13 +101,13 @@ public abstract class CPUBase {
 
   public abstract void writeBack() ;
 
-  protected void setAnalyzer(net.techest.asmer.core.cpu.addr.AnalyzerBase newanayzer) {
+  protected void setAnalyzer(AnalyzerBase newanayzer) {
          
         this.anayzer=newanayzer;
         
   }
 
-  protected void setRom(net.techest.asmer.core.rom.RomBase newRom) {
+  protected void setRom(RomBase newRom) {
         this.rom=newRom;
   }
 
@@ -117,7 +117,7 @@ public abstract class CPUBase {
    * @param name
    * @return Register
    */
-  public net.techest.asmer.core.cpu.register.Register getRegisterByName(String name) {
+  public Register getRegisterByName(String name) {
             for(int i=0;i<regs.size();i++){
                 if(regs.get(i).getName().equals(name))
                 {
@@ -134,7 +134,7 @@ public abstract class CPUBase {
    * @return
    * @throws Exception
    */
-  public net.techest.asmer.core.cpu.addr.AnalyzerBase getAnalyzer() throws Exception {
+  public AnalyzerBase getAnalyzer() throws Exception {
         if(this.anayzer==null){
             throw new Exception(this.getClass().getName()+" No Analyzer Loaded");
         }
