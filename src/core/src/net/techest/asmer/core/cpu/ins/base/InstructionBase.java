@@ -20,11 +20,12 @@ package net.techest.asmer.core.cpu.ins.base;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import net.techest.asmer.core.exceptions.ArgsException;
+import net.techest.asmer.core.exceptions.AddressingException;
 import java.util.ArrayList;
-import net.techest.asmer.core.cpu.addr.AnalyzerBase;
-import net.techest.asmer.core.cpu.Args;
+import net.techest.asmer.core.cpu.analyzer.AnalyzerBase;
+import net.techest.asmer.core.cpu.addressing.Addressing;
 import net.techest.asmer.core.cpu.CPUBase;
+import net.techest.asmer.core.exceptions.ArgsException;
 import net.techest.asmer.core.util.Log4j;
 import net.techest.asmer.core.util.StringUtil;
 /**
@@ -43,7 +44,7 @@ public abstract class InstructionBase implements InstructionInterface {
    * 指令参数
    * 
    */
-  ArrayList<Args> args;
+  ArrayList<Addressing> args;
 
   /**
    * 指令模式串 不匹配的将作为非正常指令
@@ -65,7 +66,7 @@ public abstract class InstructionBase implements InstructionInterface {
 
   public InstructionBase(CPUBase aThis) {
         cpu=aThis;
-        args=new ArrayList<Args>();
+        args=new ArrayList<Addressing>();
         pattren="";
         setName("");
   }
@@ -122,7 +123,7 @@ public abstract class InstructionBase implements InstructionInterface {
             throw new ArgsException(ex.getMessage());
         }
         
-        args=any.parse(ins,pattenAny);
+        args=any.parseArgs(ins,pattenAny);
 
         if(args.size()!=this.getArgvLength()){
             throw new ArgsException("Args Not Match");
@@ -130,7 +131,7 @@ public abstract class InstructionBase implements InstructionInterface {
 
   }
 
-  protected Args getArgv(int i) {
+  protected Addressing getArgv(int i) {
         return this.args.get(i-1);
   }
 

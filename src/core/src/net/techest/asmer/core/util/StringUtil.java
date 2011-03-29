@@ -26,9 +26,10 @@ public class StringUtil {
   {
             Pattern pn=Pattern.compile(RegxString);
             Matcher mc=pn.matcher(SourceString);
+            String result="";
             if(mc.find())
-                return mc.group(pos);
-            return "";
+                result= mc.group(pos);
+            return result;
   }
 
   /**

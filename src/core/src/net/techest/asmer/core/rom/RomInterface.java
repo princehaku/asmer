@@ -18,13 +18,14 @@
 
 package net.techest.asmer.core.rom;
 
+import java.io.IOException;
+
 /**主存接口
  * 
  * @author princehaku
  */
 public interface RomInterface {
-    void RomInterface(long byteSize);
-    void getSize();
-    void readBlock(long pos);
-    void writeBlock(long pos,String value);
+    int getSize();
+    String readBlock(int pos) throws IOException;
+    void writeBlock(int pos,String value) throws IOException;
 }

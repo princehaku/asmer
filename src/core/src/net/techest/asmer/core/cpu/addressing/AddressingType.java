@@ -16,25 +16,25 @@
  *  Created on : 2011-3-22, 9:24:01
  *  Author     : princehaku
  */
-package net.techest.asmer.core.cpu;
+package net.techest.asmer.core.cpu.addressing;
 
 /**
  * 
  * @author princehaku
  */
-public enum ArgsType {
-  REGISTER,/**
-   * 寄存器
-   * 
-   */
+public enum AddressingType {
 
-  ROM,/**
-   * 主存
-   * 
+  /**立即数寻址
+   *
    */
-
-  INSNUMBER,/**
-   * 立即数
+  INSNUMBER,
+  /**
+   * 寄存器寻址
+   *
    */
-;
+  REGISTER,
+  /**直接寻址
+   *
+   */
+  DIRECT,
 }

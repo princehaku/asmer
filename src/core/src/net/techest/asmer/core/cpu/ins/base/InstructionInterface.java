@@ -18,6 +18,7 @@
  */
 package net.techest.asmer.core.cpu.ins.base;
 
+import net.techest.asmer.core.exceptions.AddressingException;
 import net.techest.asmer.core.exceptions.ArgsException;
 import net.techest.asmer.core.exceptions.InsException;
 /**
@@ -26,6 +27,7 @@ import net.techest.asmer.core.exceptions.InsException;
  * @author princehaku
  */
 public interface InstructionInterface {
+    
   void check(String ins) throws ArgsException ;
 
   void execute() throws InsException ;

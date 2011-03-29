@@ -18,7 +18,7 @@
  */
 package net.techest.asmer.core.cpu;
 
-import net.techest.asmer.core.cpu.addr.AnalyzerBase;
+import net.techest.asmer.core.cpu.analyzer.AnalyzerBase;
 import net.techest.asmer.core.cpu.ins.base.InstructionBase;
 import net.techest.asmer.core.cpu.ins.base.InstructionWorker;
 import net.techest.asmer.core.cpu.register.Register;
@@ -33,7 +33,7 @@ import net.techest.asmer.core.util.StringUtil;
  * 
  * @author princehaku
  */
-public abstract class CPUBase {
+public abstract class CPUBase implements CPUInterface{
   protected InstructionWorker irs;
 
   protected RegisterWorker regs;
@@ -57,26 +57,6 @@ public abstract class CPUBase {
         Log4j.i(this.getClass(), "=============  CPU INIT END =============");
   }
 
-  /**
-   * 读取指令分析器
-   */
-  public abstract void loadAnalyzer() ;
-
-  /**
-   * 载入寄存器
-   */
-  public abstract void loadReg() ;
-
-  /**
-   * 载入指令
-   */
-  public abstract void loadIns() ;
-
-  /**
-   * 载入主存
-   */
-  public abstract void loadRom() ;
-
   public void execute(String ins) throws InsException {
         //第一步 读取指令名称
         String insName=StringUtil.findMc(ins,"(\\S*?)\\s",1);
@@ -94,12 +74,9 @@ public abstract class CPUBase {
             Log4j.e(this.getClass(),"ArgsException "+ ex.getMessage());
             throw new InsException(ex.getMessage());
         }
-        
         ir.execute();
-
   }
 
-  public abstract void writeBack() ;
 
   protected void setAnalyzer(AnalyzerBase newanayzer) {
          
@@ -110,6 +87,13 @@ public abstract class CPUBase {
   protected void setRom(RomBase newRom) {
         this.rom=newRom;
   }
+
+    public RomBase getRom() {
+        if(rom==null){
+            Log4j.e(this.getClass(), "Main rom is not loaded");
+        }
+        return rom;
+    }
 
   /**
    * 遍历寄存器 通过名字得到一个寄存器

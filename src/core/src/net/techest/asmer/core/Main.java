@@ -36,9 +36,9 @@ public class Main {
         Asmer as=new Asmer();
         CPUBase cpu =new CPU8086();
         try {
-            cpu.execute("ADD AX,0001H");
-            cpu.execute("MOV BX,[AX]");
-            cpu.execute("ADD AX,BX");
+            cpu.execute("ADD BX,3");
+            cpu.execute("ADD DS,1E00H");
+            cpu.execute("MOV [1000H],BX");
         } catch (InsException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }

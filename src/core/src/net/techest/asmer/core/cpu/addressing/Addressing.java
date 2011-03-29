@@ -16,32 +16,58 @@
  *  Created on : 2011-3-21, 17:19:23
  *  Author     : princehaku
  */
-package net.techest.asmer.core.cpu;
+package net.techest.asmer.core.cpu.addressing;
+
+import net.techest.asmer.core.exceptions.AddressingException;
+import net.techest.asmer.core.cpu.CPUBase;
 
 /**
- * 参数类
+ * 寻址类
  * 
  * @author princehaku
  */
-public class Args {
+public abstract class Addressing {
   /**
-   * 参数类型
+   * 寻址类型
    * 
    * 
    */
-  private ArgsType type;
+  protected AddressingType type;
 
   /**
    * 参数的值
    * 
    */
-  private String value;
+  protected String value;
 
-  public ArgsType getType() {
+  protected CPUBase cpu;
+
+  public Addressing(){
+      
+    }
+
+  public Addressing(CPUBase cpu){
+    this.cpu=cpu;
+    }
+
+   /**需要由继承类实现
+     *
+     * @param param
+     * @return
+     * @throws AddressingException
+     */
+  public abstract Addressing parse(String param) throws AddressingException;
+
+
+  public CPUBase getCpu() {
+        return cpu;
+    }
+
+  public AddressingType getType() {
         return type;
   }
 
-  public void setType(ArgsType type) {
+  public void setType(AddressingType type) {
         this.type = type;
   }
 
@@ -52,5 +78,4 @@ public class Args {
   public void setValue(String value) {
         this.value = value;
   }
-
 }

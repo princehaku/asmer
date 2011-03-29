@@ -18,32 +18,63 @@
 
 package net.techest.asmer.core.rom;
 
+import java.io.IOException;
+import java.util.Hashtable;
+import net.techest.asmer.core.util.Log4j;
+
 /**
  * 
  * @author princehaku
  */
 public class RomBase implements RomInterface {
+    
   Hashtable hs;
 
   private int addrLength;
 
   public RomBase(int addrLength) {
-        Log4j.i(this.getClass(), "New rom create with address length"+addrLength);
+        Log4j.i(this.getClass(), "New rom create with address length "+addrLength);
         this.addrLength=addrLength;
         hs=new Hashtable(this.addrLength);
-        hs.get(1);
+        hs.put(0, "asdasd");
   }
 
   public int getSize() {
         return 2^addrLength;
   }
 
-  public String readBlock(int pos) {
-        throw new UnsupportedOperationException("Not supported yet.");
+  public int getOffset(String paName) {
+        return 2^addrLength;
   }
 
-  public void writeBlock(int pos, String value) {
-        throw new UnsupportedOperationException("Not supported yet.");
+  public String readBlock(int pos)  throws IOException{
+        if(hs.containsKey(pos)){
+            Log4j.i(this.getClass(), "Get rom block at "+pos);
+            return hs.get(pos).toString();
+        }else{
+            Log4j.i(this.getClass(), "No rom block found at "+pos);
+            byte[] d = " ".getBytes();
+            return new String(d,8);
+        }
+  }
+/**
+ *
+ * @param pos 10进制
+ * @param value
+ * @throws IOException
+ */
+  public void writeBlock(int pos, String value) throws IOException{
+      if(value.length()%8!=0||!value.replaceAll("1", "").replaceAll("0","").equals("")){
+            Log4j.e(this.getClass(), "value error "+value);
+            throw new IOException("writeBlock invaild value");
+      }
+        if(hs.containsKey(pos)){
+            Log4j.i(this.getClass(), "Overwrite rom block at "+pos);
+            hs.put(pos,value);
+        }else{
+            Log4j.i(this.getClass(), "No rom Block Found "+Integer.toHexString(pos)+"H");
+            hs.put(pos,value);
+        }
   }
 
 }

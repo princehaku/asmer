@@ -13,12 +13,12 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  * 
- *  Created on : 2011-3-22, 11:32:09
+ *  Created on : 2011-3-17, 11:32:09
  *  Author     : princehaku
  */
 package net.techest.asmer.core.cpu.ins;
 
-import net.techest.asmer.core.cpu.ArgsType;
+import net.techest.asmer.core.cpu.addressing.AddressingType;
 import net.techest.asmer.core.cpu.CPUBase;
 import net.techest.asmer.core.cpu.ins.base.InstructionBase;
 import net.techest.asmer.core.exceptions.BitsException;
@@ -30,28 +30,28 @@ import net.techest.asmer.core.util.StringUtil;
  * 
  * @author princehaku
  */
-public class InstructionSUB extends InstructionBase {
-  public InstructionSUB(CPUBase aThis) {
+public class Instruction8086ADD extends InstructionBase {
+  public Instruction8086ADD(CPUBase aThis) {
         super(aThis);
-        this.setName("SUB");
+        this.setName("ADD");
   }
 
   public void execute() throws InsException {
         String bitsA = "";
         String bitsB = "";
-        if (this.getArgv(1).getType() == ArgsType.REGISTER && this.getArgv(2).getType() == ArgsType.REGISTER) {
+        if (this.getArgv(1).getType() == AddressingType.REGISTER && this.getArgv(2).getType() == AddressingType.REGISTER) {
             bitsA = cpu.getRegisterByName(this.getArgv(1).getValue()).getBits();
             bitsB = cpu.getRegisterByName(this.getArgv(2).getValue()).getBits();
         }
-        if (this.getArgv(1).getType() == ArgsType.REGISTER && this.getArgv(2).getType() == ArgsType.INSNUMBER) {
+        if (this.getArgv(1).getType() == AddressingType.REGISTER && this.getArgv(2).getType() == AddressingType.INSNUMBER) {
             bitsA = cpu.getRegisterByName(this.getArgv(1).getValue()).getBits();
             bitsB = this.getArgv(2).getValue();
         }
         try {
-            String H = BitsString.minus(bitsA, bitsB);
+            String H = BitsString.plus(bitsA, bitsB);
             //溢出检测 如果溢出了
             if (H.length() > cpu.getRegisterByName(this.getArgv(1).getValue()).getLength()) {
-                Log4j.i(this.getClass(), "SUB OVERFLOW");
+                Log4j.i(this.getClass(), "ADD OVERFLOW");
                 //丢弃最高位
                 H = H.substring(H.length() - cpu.getRegisterByName(this.getArgv(1).getValue()).getLength(), H.length());
                 //设置符号位 和溢出位

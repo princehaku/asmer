@@ -18,12 +18,13 @@
  */
 package net.techest.asmer.core.cpu;
 
-import net.techest.asmer.core.cpu.ins.InstructionSUB;
-import net.techest.asmer.core.cpu.ins.InstructionMOV;
-import net.techest.asmer.core.cpu.addr.Analyzer8086;
-import net.techest.asmer.core.cpu.ins.InstructionADD;
+import net.techest.asmer.core.cpu.analyzer.Analyzer8086;
+import net.techest.asmer.core.cpu.ins.Instruction8086ADD;
+import net.techest.asmer.core.cpu.ins.Instruction8086MOV;
+import net.techest.asmer.core.cpu.ins.Instruction8086SUB;
 import net.techest.asmer.core.cpu.register.RegisterFactory;
 import net.techest.asmer.core.rom.RomBase;
+
 /**
  * 160166的实现类
  * 
@@ -68,9 +69,9 @@ public class CPU8086 extends CPUBase {
 
   @Override
   public void loadIns() {
-        irs.add(new InstructionADD(this));
-        irs.add(new InstructionSUB(this));
-        irs.add(new InstructionMOV(this));
+        irs.add(new Instruction8086ADD(this));
+        irs.add(new Instruction8086SUB(this));
+        irs.add(new Instruction8086MOV(this));
   }
 
   @Override
